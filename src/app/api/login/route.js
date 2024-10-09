@@ -12,6 +12,11 @@ export async function POST(req) {
   const apiUrl = process.env.API_URL;
   const userEndPoint = `${apiUrl}api/token/`;
 
+  // logs
+  console.log('Incoming Request Method:', req.method);
+  console.log('Incoming Request Headers:', req.headers);
+  console.log('Incoming Request Body:', req.body);
+
   // Get the email and password from the request body
   const body = await req.json();
   const { email, password } = body;
