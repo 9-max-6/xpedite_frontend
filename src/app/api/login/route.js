@@ -16,6 +16,7 @@ export async function POST(req) {
   console.log('Incoming Request Method:', req.method);
   console.log('Incoming Request Headers:', req.headers);
   console.log('Incoming Request Body:', req.body);
+  console.log('API URL:', apiUrl);
 
   // Get the email and password from the request body
   const body = await req.json();
