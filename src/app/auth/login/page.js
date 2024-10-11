@@ -44,9 +44,8 @@ export default function LoginForm() {
           description: 'You have successfuly logged in.',
           variant: 'success',
         });
-        setTimeout(() => {
-          router.push('/dashboard');
-        }, 2000);
+
+        router.push('/dashboard');
       })
       .catch((error) => {
         console.log(error);

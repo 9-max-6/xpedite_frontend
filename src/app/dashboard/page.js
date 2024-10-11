@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { cookies } from 'next/headers';
+import axios from 'axios';
 import Link from 'next/link';
 import {
   Dialog,
@@ -27,7 +29,6 @@ import {
   Truck,
   Users2,
 } from 'lucide-react';
-
 import { Badge } from '@/components/ui/badge';
 import {
   Breadcrumb,
@@ -79,14 +80,39 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { redirect } from 'next/navigation';
 
 export const description =
   'An orders dashboard with a sidebar navigation. The sidebar has icon navigation. The content area has a breadcrumb and search in the header. The main area has a list of recent orders with a filter and export button. The main area also has a detailed view of a single order with order details, shipping information, billing information, customer information, and payment information.';
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  // fetch user server side when making the call
+  let user;
+  try {
+    // Step 1: Access cookies from the request using the `cookies()` function
+    const cookieStore = cookies();
+    const token = cookieStore.get('accessToken')?.value; // Assuming you have a cookie named 'accessToken'
+
+    console.log(token);
+    // Step 2: Make the API call with the cookies
+    const res = await axios.get(`${process.env.API_URL}api/users/me/`, {
+      headers: {
+        // Step 3: Pass the cookie in the request headers
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true, // Ensures credentials like cookies are included
+    });
+
+    user = res.data;
+    console.log(user);
+  } catch (e) {
+    console.log('Dashboard hydration:', e.toString());
+    redirect('/auth/login');
+  }
+
   return (
-    <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-      <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+    <div className="flex relative flex-col sm:gap-4 sm:py-4 sm:pl-14">
+      <div className="z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
         <Breadcrumb className="hidden md:flex">
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -106,13 +132,14 @@ export default function Dashboard() {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-      </header>
+      </div>
       <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-4 xl:grid-cols-4">
         <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
             <Card className="sm:col-span-3" x-chunk="dashboard-05-chunk-0">
               <CardHeader className="pb-3">
                 <CardTitle>Your Orders</CardTitle>
+                <CardTitle>{user.email}</CardTitle>
                 <CardDescription className="max-w-lg text-balance leading-relaxed">
                   Introducing Our Dynamic Expense Requests and Approvals
                   Dashboard for Seamless Management and Insightful Analysis.
@@ -354,8 +381,8 @@ export default function Dashboard() {
             </TabsContent>
           </Tabs>
         </div>
-        <div className="m gap-4 md:gap-8 lg:col-span-2">
-          <Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
+        <div className="m overflow-scroll gap-4 md:gap-8 lg:col-span-2">
+          <Card className="" x-chunk="dashboard-05-chunk-4">
             <CardHeader className="flex flex-row items-start bg-muted/50">
               <div className="grid gap-0.5">
                 <CardTitle className="group flex items-center gap-2 text-lg">

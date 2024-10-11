@@ -10,13 +10,7 @@ import { serialize } from 'cookie';
  */
 export async function POST(req) {
   const apiUrl = process.env.API_URL;
-  const userEndPoint = `${apiUrl}api/token/`;
-
-  // logs
-  console.log('Incoming Request Method:', req.method);
-  console.log('Incoming Request Headers:', req.headers);
-  console.log('Incoming Request Body:', req.body);
-  console.log('API URL:', apiUrl);
+  const tokenEndPoint = `${apiUrl}api/token/`;
 
   // Get the email and password from the request body
   const body = await req.json();
@@ -24,7 +18,7 @@ export async function POST(req) {
 
   try {
     // API call to authenticate the user
-    const response = await axios.post(userEndPoint, { email, password });
+    const response = await axios.post(tokenEndPoint, { email, password });
     const { access, refresh } = response.data;
 
     // Set cookies using Next.js headers
@@ -33,7 +27,7 @@ export async function POST(req) {
       'Set-Cookie',
       serialize('accessToken', access, {
         httpOnly: true, // Prevents JavaScript access to the cookie
-        secure: process.env.NODE_ENV !== 'development', // Use secure in production
+        secure: false, // Use secure in production
         maxAge: 600 * 15, // 15 minutes (access token expiry)
         path: '/', // Cookie is valid on the entire site
       })
@@ -42,7 +36,7 @@ export async function POST(req) {
       'Set-Cookie',
       serialize('refreshToken', refresh, {
         httpOnly: true, // Prevents JavaScript access to the cookie
-        secure: process.env.NODE_ENV !== 'development', // Use secure in production
+        secure: false, // Use secure in production
         maxAge: 60 * 60 * 24 * 30, // 30 days (refresh token expiry)
         path: '/', // Cookie is valid on the entire site
       })

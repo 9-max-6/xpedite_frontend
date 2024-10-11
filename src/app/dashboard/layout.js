@@ -29,8 +29,8 @@ export const description =
 export default function DashboardLayout({ children }) {
   return (
     <ThemeProvider>
-      <div className="flex min-h-screen w-full flex-col">
-        <header className="space-between sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+      <div className="flex h-full w-full flex-col">
+        <div className="z-50 space-between sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
           <Button variant="link">Xpedite</Button>
           <div className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
             <ModeToggle />
@@ -55,7 +55,7 @@ export default function DashboardLayout({ children }) {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-        </header>
+        </div>
         <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
           {children}
           {/* <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]"></div> */}
