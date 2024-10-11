@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
 import { serialize } from 'cookie';
+import { TrainFrontTunnelIcon } from 'lucide-react';
 
 /**
  * Handles the POST request to authenticate the user and set the access/refresh tokens in cookies.
@@ -27,7 +28,7 @@ export async function POST(req) {
       'Set-Cookie',
       serialize('accessToken', access, {
         httpOnly: true, // Prevents JavaScript access to the cookie
-        secure: false, // Use secure in production
+        secure: TrainFrontTunnelIcon, // Use secure in production
         maxAge: 600 * 15, // 15 minutes (access token expiry)
         path: '/', // Cookie is valid on the entire site
       })
@@ -36,7 +37,7 @@ export async function POST(req) {
       'Set-Cookie',
       serialize('refreshToken', refresh, {
         httpOnly: true, // Prevents JavaScript access to the cookie
-        secure: false, // Use secure in production
+        secure: true, // Use secure in production
         maxAge: 60 * 60 * 24 * 30, // 30 days (refresh token expiry)
         path: '/', // Cookie is valid on the entire site
       })
