@@ -11,10 +11,10 @@ import {
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import SuperCycleMap from './superCycle';
+import MakeSuperCycle from './MakeSuperCycle';
 export default async function SuperCycle({ clever }) {
   // get a list of all the current supercycles
 
-  console.log(clever.token);
   let supercycles;
   try {
     const res = await axios.get(
@@ -31,14 +31,33 @@ export default async function SuperCycle({ clever }) {
     console.log(e.toString());
   }
 
-  console.log(supercycles);
+  const isFin = clever.user.designation === 'FIN';
+  const millisecondsElapsedSinceCreation =
+    new Date() - new Date(clever.supercycle.created_at);
+  const fourteenDaysInMilliseconds = 14 * 24 * 60 * 60 * 1000;
+  // const fourteenDaysInMilliseconds = 14 * 1000;
+  const canMakeNew =
+    fourteenDaysInMilliseconds <= millisecondsElapsedSinceCreation;
+
   return (
-    <Sheet>
+    <Sheet className="relative">
       <SheetTrigger asChild>
         <Button>Supercycles</Button>
       </SheetTrigger>
       <SheetContent className="overflow-y-auto">
         <SheetHeader>
+          {canMakeNew && isFin && (
+            <>
+              <SheetTitle>Choose a Supercyle</SheetTitle>
+              <SheetDescription>
+                View all the bi-weekly supercycles here and apply a super filter
+                to your dashboard to view requests by supercycle
+              </SheetDescription>
+              <MakeSuperCycle token={clever.token} />
+            </>
+          )}
+        </SheetHeader>
+        <SheetHeader className="my-5 sticky">
           <SheetTitle>Choose a Supercyle</SheetTitle>
           <SheetDescription>
             View all the bi-weekly supercycles here and apply a super filter to
@@ -46,7 +65,12 @@ export default async function SuperCycle({ clever }) {
           </SheetDescription>
         </SheetHeader>
         {supercycles.map((curr) => {
-          return <SuperCycleMap key={curr.id} curr={curr} />;
+          const currSuper = {
+            curr: curr,
+            supercycle: clever.supercycle,
+            user: clever.user,
+          };
+          return <SuperCycleMap key={curr.id} currSuper={currSuper} />;
         })}
       </SheetContent>
     </Sheet>

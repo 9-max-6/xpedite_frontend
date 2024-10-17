@@ -53,15 +53,14 @@ export default async function Dashboard({ searchParams }) {
       }
     );
     const superArray = res.data;
-    console.log('Array', superArray);
-    // check if supercycleId id specified in the request
     if (supercycleId === '') {
-      supercycle = superArray.pop(0);
+      supercycle = superArray.at(0);
     } else {
       supercycle = superArray;
     }
   } catch (e) {
     console.log('Dashboard hydration:', e.toString());
+    redirect('/404');
   }
 
   const clever = {
