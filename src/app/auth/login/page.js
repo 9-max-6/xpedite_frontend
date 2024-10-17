@@ -39,13 +39,12 @@ export default function LoginForm() {
         password,
       })
       .then((response) => {
+        router.push('/dashboard');
         toast({
           title: 'Success!',
           description: 'You have successfuly logged in.',
           variant: 'success',
         });
-
-        router.push('/dashboard');
       })
       .catch((error) => {
         console.log(error);

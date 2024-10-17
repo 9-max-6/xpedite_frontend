@@ -1,19 +1,9 @@
 import React from 'react';
 import { ThemeProvider } from '@/components/theme-provider';
-import { Toaster } from '@/components/ui/toaster';
-import Link from 'next/link';
 import ModeToggle from '@/components/mode-toggle';
 import { CircleUser, Menu, Package2, Search } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+
 import {
   DropdownMenu,
   DropdownMenuContent,

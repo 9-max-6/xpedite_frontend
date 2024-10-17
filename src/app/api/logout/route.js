@@ -9,26 +9,12 @@ import { serialize } from 'cookie';
  * @returns {NextResponse} The response object with cookies set or error message
  */
 export async function POST(req) {
-  const apiUrl = process.env.API_URL;
-  const tokenEndPoint = `${apiUrl}api/token/`;
-
-  const body = await req.json();
-  const { email, password } = body;
-
   try {
     const response = await axios.post(tokenEndPoint, { email, password });
     const { access, refresh } = response.data;
 
     const responseHeaders = new Headers();
-    responseHeaders.append(
-      'Set-Cookie',
-      serialize('accessToken', access, {
-        httpOnly: true,
-        secure: process.env.environment == 'production',
-        maxAge: 60 * 60 * 24 * 30,
-        path: '/',
-      })
-    );
+    responseHeaders.append('Set-Cookie', serialize('accessToken', access, {}));
     responseHeaders.append(
       'Set-Cookie',
       serialize('refreshToken', refresh, {
@@ -40,7 +26,7 @@ export async function POST(req) {
     );
 
     return new NextResponse(
-      JSON.stringify({ message: 'Signed in successfully' }),
+      JSON.stringify({ message: 'Signed out in successfully' }),
       {
         status: 200,
         headers: responseHeaders,
