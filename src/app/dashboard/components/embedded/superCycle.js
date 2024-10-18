@@ -1,6 +1,5 @@
 'use client';
 import { format, parse } from 'date-fns';
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -9,9 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { DashIcon } from '@radix-ui/react-icons';
 
 export default function SuperCycleMap({ currSuper }) {
+  // have to change and use environment variables for this.
   const dashboardURL = 'http://localhost:3000/dashboard/';
   const currCycleCreatedAt = new Date(currSuper.curr.created_at);
   const formattedDate = format(currCycleCreatedAt, "do MMMM, yyyy 'at' h a");

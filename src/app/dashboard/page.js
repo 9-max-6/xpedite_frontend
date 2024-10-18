@@ -10,6 +10,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { redirect } from 'next/navigation';
+import ClientWrapper from './clientwrapper';
 import DetailedRequest from './components/request';
 import CountDown from './components/countdown';
 import GreetingCard from './components/greeting';
@@ -17,7 +18,11 @@ import MyCycle from './components/Requests/Cycles';
 
 export const description =
   'An orders dashboard with a sidebar navigation. The sidebar has icon navigation. The content area has a breadcrumb and search in the header. The main area has a list of recent orders with a filter and export button. The main area also has a detailed view of a single order with order details, shipping information, billing information, customer information, and payment information.';
-
+/**
+ *
+ * @param {*} param0
+ * @returns
+ */
 export default async function Dashboard({ searchParams }) {
   let user, token, supercycle;
   let supercycleId = searchParams.supercycleId;
@@ -86,18 +91,7 @@ export default async function Dashboard({ searchParams }) {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-      <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-4 xl:grid-cols-4">
-        <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-            <GreetingCard clever={clever} />
-          </div>
-        </div>
-        <div className="m overflow-scroll gap-4 md:gap-8 lg:col-span-2">
-          <CountDown />
-          <MyCycle clever={clever} />
-          <DetailedRequest />
-        </div>
-      </main>
+      <ClientWrapper clever={clever} />
     </div>
   );
 }

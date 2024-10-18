@@ -40,3 +40,28 @@ export async function POST(req) {
     });
   }
 }
+
+export async function GET(req) {
+  const apiUrl = process.env.API_URL;
+  const supercycleEndpoint = `${apiUrl}api/cycles/super-cycles/`;
+
+  const cookieStore = cookies();
+  const token = cookieStore.get('accessToken')?.value;
+
+  try {
+    const response = await axios.get(supercycleEndpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return new NextResponse(JSON.stringify({ nesteddata: response.data }), {
+      status: 201,
+    });
+  } catch (error) {
+    console.log(error.toString());
+
+    return new NextResponse(JSON.stringify({ error: error.message }), {
+      status: error.response ? error.response.status : 500,
+    });
+  }
+}
