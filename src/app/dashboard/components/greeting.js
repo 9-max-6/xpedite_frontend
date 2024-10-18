@@ -14,7 +14,7 @@ function GreetingCard({ clever }) {
       <CardHeader className="pb-3">
         <CardTitle>Hi, {clever.user.first_name}</CardTitle>
         <CardDescription className="max-w-lg text-balance leading-relaxed">
-          We're thrilled to have you onboard. With Xpedite, now you can{' '}
+          We&apos;re thrilled to have you onboard. With Xpedite, now you can{' '}
           <b>file or approve </b>expenses and plans with ease.
         </CardDescription>
         <CardDescription>Click the button below to get started</CardDescription>
