@@ -1,5 +1,5 @@
 'use client';
-import DetailedRequest from './components/oneRequest';
+import DetailedRequest from './components/request';
 import CountDown from './components/countdown';
 import GreetingCard from './components/greeting';
 import MyCycle from './components/Requests/Cycles';
