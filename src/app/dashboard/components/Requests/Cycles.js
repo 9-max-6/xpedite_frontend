@@ -1,46 +1,11 @@
 'use client';
-import { Badge } from '@/components/ui/badge';
+import { QueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-import {
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  CreditCard,
-  File,
-  Home,
-  LineChart,
-  ListFilter,
-  MoreVertical,
-  Package,
-  Package2,
-  PanelLeft,
-  Search,
-  Settings,
-  ShoppingCart,
-  Truck,
-  Users2,
-} from 'lucide-react';
+import { File, ListFilter } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -51,6 +16,7 @@ import MyCycle from './MyCycle';
 import AllCycles from './AllCycles';
 import AllSups from './AllSups';
 import AllJets from './AllJets';
+import Comms from './Comms';
 /**
  *
  * @param {*} param
@@ -65,6 +31,10 @@ export default function Cycles({ clever }) {
 
   // filter logic
   const [filters, setfilters] = useState('Posted');
+  const props = {
+    filters: filters,
+    setfilters: setfilters,
+  };
 
   return (
     <Tabs defaultValue="comms">
@@ -76,6 +46,8 @@ export default function Cycles({ clever }) {
           {hasSup && <TabsTrigger value="sup">RCs & DRCs</TabsTrigger>}
           {isFinance && <TabsTrigger value="all">All requests</TabsTrigger>}
         </TabsList>
+        {/* This div should be a component of it's own carryi9nhg the filters that
+        can be used to rerender any of the components in this section */}
         <div className="ml-auto flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -121,10 +93,10 @@ export default function Cycles({ clever }) {
         </div>
       </div>
       <TabsContent value="me">
-        <MyCycle />
+        <MyCycle props={props} />
       </TabsContent>
       <TabsContent value="comms">
-        <MyCycle />
+        <Comms />
       </TabsContent>
       <TabsContent value="all">
         <AllCycles />

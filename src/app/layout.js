@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import ModeToggle from '@/components/mode-toggle';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 
 const geistSans = localFont({
@@ -18,6 +19,7 @@ const geistMono = localFont({
 });
 
 export default function RootLayout({ children }) {
+  const queryclient = new QueryClient();
   return (
     <html lang="en">
       <body
@@ -27,7 +29,9 @@ export default function RootLayout({ children }) {
           {/* Radial gradient for the container to give a faded look */}
           <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_10%,black)]"></div>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            {children}
+            <QueryClientProvider client={queryclient}>
+              {children}
+            </QueryClientProvider>
             <div className="absolute top-4 right-4">
               <ModeToggle />
             </div>
