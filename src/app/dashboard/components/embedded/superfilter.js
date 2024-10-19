@@ -29,7 +29,6 @@ export default function SuperCycle({ clever }) {
     queryKey: ['superCycles'],
     queryFn: async () => {
       const response = await axios.get('/api/cycles/super-cycles/');
-      console.log(response.data);
       return response.data.nesteddata;
     },
     staleTime: 5 * 60 * 1000,
