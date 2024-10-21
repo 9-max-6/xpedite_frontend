@@ -48,7 +48,6 @@ function DetailedRequest({
         responseType: 'arraybuffer',
       });
 
-      console.log(response.data);
       const pdfBlob = new Blob([response.data], {
         type: 'application/pdf',
       });
@@ -79,9 +78,6 @@ function DetailedRequest({
       if (!exemptedPointsLite.includes(detailedId)) {
         try {
           const { data } = await axios.get(`api/requests/?id=${detailedId}`);
-
-          console.log(data.nesteddata);
-
           // show the approve button if the user id is not the same as the
           // the id of the detailed request and the request is posted
           if (
@@ -99,7 +95,6 @@ function DetailedRequest({
             setisApprover(true);
           }
           setresData(data.nesteddata);
-          console.log(data.nesteddata);
         } catch (error) {
           seterror(error.message);
         } finally {

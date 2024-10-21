@@ -49,7 +49,6 @@ export default function MakeRequest({
 
   function handleFileUpload(newFiles) {
     setFiles(newFiles);
-    console.log(newFiles);
   }
 
   const { toast } = useToast();
@@ -85,7 +84,6 @@ export default function MakeRequest({
           backgroundColor: 'green', //
         },
       });
-      console.log(response.data.nesteddata);
       setdetailedId(response.data.nesteddata.id);
     } catch (e) {
       console.log('Make request', e);

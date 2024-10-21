@@ -17,12 +17,8 @@ export default function Logout() {
       .post('/api/logout')
       .then(() => {
         setTimeout(() => {
-          // Here, you would call your logout function (e.g., API call)
-          console.log('User logged out'); // Replace with your actual logout logic
-
-          // Redirect to the home page or login page
-          router.push('/'); // Adjust the path as needed
-        }, 1000); // 1000ms = 1 second delay
+          router.push('/');
+        }, 1000);
       })
       .catch((e) => {});
   });

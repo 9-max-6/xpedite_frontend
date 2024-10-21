@@ -34,7 +34,6 @@ export default function Approver({
   const [isOpen, setisOpen] = useState(false);
 
   useEffect(() => {
-    console.log('Approver: I mounted');
   });
   const { toast } = useToast();
   async function handleSubmit() {

@@ -38,8 +38,6 @@ export default function AllSups({ props, setshowfilters }) {
       return value.status === filters;
     });
 
-    console.log(filteredData);
-
     return filteredData;
   }
 

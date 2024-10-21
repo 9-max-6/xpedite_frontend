@@ -31,9 +31,6 @@ export default function AllCycles({ props, setshowfilters }) {
     const filteredData = resData.filter((value) => {
       return value.status === filters;
     });
-
-    console.log(filteredData);
-
     return filteredData;
   }
 
