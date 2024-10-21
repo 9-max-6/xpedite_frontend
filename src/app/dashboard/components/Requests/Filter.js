@@ -16,6 +16,7 @@ export default function Filters({ props }) {
   const hasJETs = user_designation === 'RC' || user_designation === 'DRC';
   const hasSup = user_designation === 'RM';
   const isFinance = user_designation === 'FIN';
+  const isJET = user_designation === 'JET';
 
   const filters = {
     filter: props.filters,
@@ -37,36 +38,21 @@ export default function Filters({ props }) {
           {/* filters are according to designation too
             a finance person will see approved by RCs and DRCs */}
           {/* filters for finance */}
-          {isFinance && (
+          {!isJET && (
             <>
               <DropdownMenuSeparator />
-              <LoneFilter
-                filters={filters}
-                value={'Pending approval by Finance'}
-              />
-              <LoneFilter filters={filters} value={'Approved by Finance'} />
-              <LoneFilter filters={filters} value={'Rejected by Finance'} />
-            </>
-          )}
 
-          {/* filters for RM */}
-          {(hasSup || hasJETs) && (
-            <>
-              <DropdownMenuSeparator />
-              <LoneFilter
-                filters={filters}
-                value={'Pending approval by Finance'}
-              />
-              <LoneFilter filters={filters} value={'Approved by Finance'} />
-              <LoneFilter filters={filters} value={'Rejected by Finance'} />
-              <DropdownMenuSeparator />
-              <LoneFilter
-                filters={filters}
-                value={'Pending approval by Supervisor'}
-              />
-              <LoneFilter filters={filters} value={'Rejected by Supervisor'} />
+              <LoneFilter filters={filters} value={'all'} />
 
               <DropdownMenuSeparator />
+              <LoneFilter filters={filters} value={'posted'} />
+              <LoneFilter filters={filters} value={'reviewed'} />
+              <LoneFilter filters={filters} value={'rejected_supervisor'} />
+
+              <DropdownMenuSeparator />
+
+              <LoneFilter filters={filters} value={'approved_finance'} />
+              <LoneFilter filters={filters} value={'rejected_finance'} />
             </>
           )}
         </DropdownMenuContent>

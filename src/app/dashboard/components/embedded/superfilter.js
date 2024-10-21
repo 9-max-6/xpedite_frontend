@@ -9,7 +9,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-
+import { Loader2 } from 'lucide-react';
 import MakeSuperCycle from './MakeSuperCycle';
 import SuperCycleMap from './superCycle';
 
@@ -43,11 +43,6 @@ export default function SuperCycle({ clever }) {
   const canMakeNew =
     fourteenDaysInMilliseconds <= millisecondsElapsedSinceCreation;
 
-  // Loading state
-  if (isLoading) {
-    return <div>Loading...</div>; // Replace with a loading component if needed
-  }
-
   // Error state
   if (error) {
     console.error('Error fetching supercycles:', error);
@@ -57,7 +52,9 @@ export default function SuperCycle({ clever }) {
   return (
     <Sheet className="relative">
       <SheetTrigger asChild>
-        <Button>Supercycles</Button>
+        <Button>
+          {isLoading ? <Loader2 className="animate-spin" /> : <>Supercycles</>}
+        </Button>
       </SheetTrigger>
       <SheetContent className="overflow-y-auto">
         <SheetHeader>

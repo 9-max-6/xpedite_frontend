@@ -30,9 +30,7 @@ export const RequestUploadButton = ({ onClick }) => {
           <p className="relative z-20 font-sans font-bold text-neutral-700 dark:text-neutral-300 text-base">
             Upload Request
           </p>
-          <p className="relative z-20 font-sans font-normal text-neutral-400 dark:text-neutral-400 text-base mt-2">
-            Click to upload
-          </p>
+          <p className="relative z-20 font-sans font-normal text-neutral-400 dark:text-neutral-400 text-base mt-2"></p>
           <motion.div
             layoutId="file-upload"
             variants={mainVariant}

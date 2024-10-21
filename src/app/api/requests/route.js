@@ -12,21 +12,12 @@ export async function POST(req) {
   const token = cookieStore.get('accessToken')?.value;
   const body = await req.formData(); // Change here
 
-  // If you want to log the contents of body
-  const data = {};
-  body.forEach((value, key) => {
-    data[key] = value;
-  });
-
-  console.log(data);
-
   try {
     const response = await axios.post(mycycleEndpoint, body, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
     return new NextResponse(
       JSON.stringify({
         nesteddata: response.data,
@@ -59,7 +50,6 @@ export async function GET(req) {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
     return new NextResponse(
       JSON.stringify({
         nesteddata: response.data,
@@ -74,5 +64,36 @@ export async function GET(req) {
     return new NextResponse(JSON.stringify({ error: error.message }), {
       status: error.response ? error.response.status : 500,
     });
+  }
+}
+
+export async function PATCH(req) {
+  const apiUrl = process.env.API_URL;
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get('id');
+  const supercycle = searchParams.get('supercycle');
+  const mycycleEndpoint = `${apiUrl}api/requests/${id}/approve/?supercycle=${supercycle}`;
+
+  const cookieStore = cookies();
+  const token = cookieStore.get('accessToken')?.value;
+  const body = await req.json();
+
+  try {
+    const res = await axios.patch(mycycleEndpoint, body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return new NextResponse({ status: 201 });
+  } catch (e) {
+    console.log(e.data);
+    return new NextResponse(
+      JSON.stringify({
+        error: e.toString(),
+      }),
+      {
+        status: e.status,
+      }
+    );
   }
 }

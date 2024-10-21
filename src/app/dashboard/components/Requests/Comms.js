@@ -1,7 +1,8 @@
 'use client';
 import { TypewriterEffectSmooth } from '@/components/ui/typewriter-effect';
+import { useEffect } from 'react';
 
-export default function Comms() {
+export default function Comms({ props, showfilters, setshowfilters }) {
   const words = [
     {
       text: 'X',
@@ -25,6 +26,10 @@ export default function Comms() {
       text: 'e',
     },
   ];
+  useEffect(() => {
+    props.setdetailedId('default');
+    setshowfilters(false);
+  });
   return (
     <div className="flex flex-col h-[40rem]  ">
       <TypewriterEffectSmooth words={words} />
