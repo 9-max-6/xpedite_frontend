@@ -16,7 +16,7 @@ import {
  */
 
 export default function SuperCycleMap({ currSuper }) {
-  const dashboardURL = 'https://xpedite-frontend.vercel.app/';
+  const dashboardURL = 'https://xpedite-frontend.vercel.app/dashboard/';
   const currCycleCreatedAt = new Date(currSuper.curr.created_at);
   const formattedDate = format(currCycleCreatedAt, "do MMMM, yyyy 'at' h a");
   const isMatch = currSuper.curr.id === currSuper.supercycle.id;
