@@ -19,6 +19,10 @@ import { Label } from '@/components/ui/label';
 export const description =
   "A simple login form with email and password. The submit button says 'Sign in'.";
 
+/**
+ * @react component LoginForm
+ * @returns LoginForm
+ */
 export default function LoginForm() {
   // routing
   const router = useRouter();
@@ -61,47 +65,49 @@ export default function LoginForm() {
   };
 
   return (
-    <Card className="w-full max-w-sm">
-      <CardHeader>
-        <CardTitle className="text-2xl">Login</CardTitle>
-        <CardDescription>
-          Enter your password below to login to your account.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="grid gap-4">
-        <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="m@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="h-screen w-full flex flex-col items-center justify-center">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardDescription>
+            Enter your password below to login to your account.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="m@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button className="w-full" onClick={() => handleSubmit()}>
+            Sign in
+          </Button>
+        </CardFooter>
+        <div className="mb-4 text-center text-sm">
+          New to Xpedite?{' '}
+          <Link href="/auth/signup" className="underline">
+            Sign up
+          </Link>
         </div>
-        <div className="grid gap-2">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            value={password}
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Button className="w-full" onClick={() => handleSubmit()}>
-          Sign in
-        </Button>
-      </CardFooter>
-      <div className="mb-4 text-center text-sm">
-        New to Xpedite?{' '}
-        <Link href="/auth/signup" className="underline">
-          Sign up
-        </Link>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 }

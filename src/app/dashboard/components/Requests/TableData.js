@@ -1,14 +1,12 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { TableCell, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { format, parse } from 'date-fns';
+import { format } from 'date-fns';
 
+/**
+ *
+ * @param {props} param0
+ * @returns
+ */
 export default function TableData({ filteredData, props }) {
   const types = {
     A: 'Activity request',

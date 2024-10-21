@@ -1,7 +1,12 @@
-import { NextResponse } from 'next/server';
 import axios from 'axios';
+import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
+/**
+ *
+ * @param {Request} req
+ * @returns
+ */
 export async function GET(req) {
   const apiUrl = process.env.API_URL;
   const { searchParams } = new URL(req.url);

@@ -1,7 +1,6 @@
-import { NextResponse } from 'next/server';
 import axios from 'axios';
+import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { parse } from 'cookie';
 
 /**
  * Handles the POST request to authenticate the user and set the access/refresh tokens in cookies.
@@ -41,6 +40,11 @@ export async function POST(req) {
   }
 }
 
+/**
+ *
+ * @param {request object} req
+ * @returns
+ */
 export async function GET(req) {
   const apiUrl = process.env.API_URL;
   const supercycleEndpoint = `${apiUrl}api/cycles/super-cycles/`;

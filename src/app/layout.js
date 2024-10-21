@@ -2,7 +2,6 @@
 import localFont from 'next/font/local';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
-import ModeToggle from '@/components/mode-toggle';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 
@@ -17,6 +16,11 @@ const geistMono = localFont({
   variable: '--font-geist-mono',
   weight: '100 900',
 });
+/**
+ *
+ * @param {children} param0
+ * @returns tootlayout
+ */
 
 export default function RootLayout({ children }) {
   const queryclient = new QueryClient();
@@ -31,9 +35,7 @@ export default function RootLayout({ children }) {
             <QueryClientProvider client={queryclient}>
               {children}
             </QueryClientProvider>
-            <div className="absolute top-4 right-4">
-              <ModeToggle />
-            </div>
+
             <Toaster />
           </ThemeProvider>
         </div>

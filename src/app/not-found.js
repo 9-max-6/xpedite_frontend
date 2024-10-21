@@ -1,5 +1,9 @@
 import Link from 'next/link';
 
+/**
+ *
+ * @returns when page not found
+ */
 export default function Custom404() {
   return (
     <div style={styles.container}>

@@ -3,11 +3,15 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import { BookX } from 'lucide-react';
+
+/**
+ *
+ * @returns NothingHere
+ */
 export default function NothingHere() {
   return (
     <Card x-chunk="dashboard-05-chunk-3 h-auto">

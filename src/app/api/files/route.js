@@ -1,7 +1,6 @@
-import { NextResponse } from 'next/server';
 import axios from 'axios';
+import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { parse } from 'cookie';
 
 /**
  *

@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Badge } from '@/components/ui/badge';
-import TableData from './TableData';
-import { useQuery } from '@tanstack/react-query';
 import { Skeleton } from '@/components/ui/skeleton';
+import axios from 'axios';
+import TableData from './TableData';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,

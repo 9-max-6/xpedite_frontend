@@ -1,5 +1,10 @@
 import { DropdownMenuCheckboxItem } from '@/components/ui/dropdown-menu';
 
+/**
+ *
+ * @param {props} param0
+ * @returns
+ */
 function LoneFilter({ filters, value }) {
   const setFilter = () => {
     filters.setfilters(value);

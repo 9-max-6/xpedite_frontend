@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import TableData from './TableData';
-import { useQuery } from '@tanstack/react-query';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
 import NothingHere from '../NothingHere';
+
+/**
+ *
+ * @param {props} param0
+ * @returns
+ */
 
 export default function AllSups({ props, setshowfilters }) {
   const [resData, setresData] = useState([]);

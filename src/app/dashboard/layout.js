@@ -1,8 +1,10 @@
 import React from 'react';
 import { ThemeProvider } from '@/components/theme-provider';
 import ModeToggle from '@/components/mode-toggle';
-import { CircleUser, Menu, Package2, Search } from 'lucide-react';
+import { CircleUser } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { LogOut } from 'lucide-react';
 
 import {
   DropdownMenu,
@@ -41,7 +43,14 @@ export default function DashboardLayout({ children }) {
                 <DropdownMenuItem>Settings</DropdownMenuItem>
                 <DropdownMenuItem>Support</DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Logout</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/auth/logout">
+                    <div className="flex gap-2">
+                      <LogOut />
+                      Logout
+                    </div>
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

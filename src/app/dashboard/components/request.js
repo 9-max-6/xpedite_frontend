@@ -1,4 +1,3 @@
-import { ChevronLeft, ChevronRight, CreditCard } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -12,12 +11,17 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card';
-import { format, parse } from 'date-fns';
+import { format } from 'date-fns';
 import { Separator } from '@/components/ui/separator';
 import MakeRequest from './Requests/MakeRequest';
 import Approver from './Requests/approver';
 import CommsData from './Requests/CommsData';
 
+/**
+ *
+ * @param {props} param0
+ * @returns DetailedRequest
+ */
 function DetailedRequest({
   setdetailedId,
   supercycle,
@@ -35,6 +39,9 @@ function DetailedRequest({
   // props
   // function to fetch file
 
+  /**
+   * return file Blob
+   */
   async function fetchFile() {
     try {
       const response = await axios.get(`/api/files/?id=${resData.file.id}`, {

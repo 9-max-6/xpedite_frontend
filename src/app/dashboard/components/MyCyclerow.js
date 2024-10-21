@@ -1,13 +1,6 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { TableCell } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { format, parse } from 'date-fns';
+import { format } from 'date-fns';
 import {
   NotebookPen,
   Landmark,
@@ -16,6 +9,11 @@ import {
   Handshake,
 } from 'lucide-react';
 
+/**
+ *
+ * @param {props} param0
+ * @returns
+ */
 export default function MyCyclerow({ props }) {
   const iconSelector = {
     P: <NotebookPen className="text-blue-700 dark:text-blue-400" />,

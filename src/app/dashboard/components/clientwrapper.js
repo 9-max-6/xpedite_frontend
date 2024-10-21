@@ -4,6 +4,11 @@ import CountDown from './countdown';
 import GreetingCard from './greeting';
 import Cycles from './Requests/Cycles';
 import { useState } from 'react';
+/**
+ *
+ * @param {clever} param0
+ * @returns ClientWrapper
+ */
 
 export default function ClientWrapper({ clever }) {
   const [filters, setfilters] = useState('all');

@@ -1,39 +1,24 @@
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Textarea } from '@/components/ui/textarea';
-
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-} from '@/components/ui/pagination';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { FileUpload } from '@/components/ui/file-upload';
-import { RequestUploadButton } from '@/components/ui/request-upload';
 import axios from 'axios';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
 
+/**
+ *
+ * @param {props} param0
+ * @returns
+ */
 export default function Approver({
   type,
   setdetailedId,
@@ -45,7 +30,6 @@ export default function Approver({
   const [comments, setcomments] = useState('');
   const [approve, setapprove] = useState('');
 
-  // upload state
   const [uploading, setuploading] = useState(false);
   const [isOpen, setisOpen] = useState(false);
 
@@ -56,7 +40,6 @@ export default function Approver({
   async function handleSubmit() {
     setuploading(true);
     try {
-      // Make the request
       const body = {
         status: approve,
         comment: comments,
@@ -69,9 +52,9 @@ export default function Approver({
         title: 'Success!',
         description: 'Updated request',
         variant: 'success',
-        position: 'bottom-left', // Set the position
+        position: 'bottom-left',
         style: {
-          backgroundColor: 'green', //
+          backgroundColor: 'green',
         },
       });
       setdetailedId(id);

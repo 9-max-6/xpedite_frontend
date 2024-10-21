@@ -1,8 +1,7 @@
 import { Button } from '@/components/ui/button';
-import { File, ListFilter } from 'lucide-react';
+import { ListFilter } from 'lucide-react';
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -22,7 +21,6 @@ export default function Filters({ props }) {
     filter: props.filters,
     setfilters: props.setfilters,
   };
-  // change state
 
   return (
     <div className="ml-auto flex items-center gap-2">

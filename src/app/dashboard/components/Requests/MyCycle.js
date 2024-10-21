@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   Card,
@@ -10,17 +9,20 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
 import MyCyclerow from '../MyCyclerow';
 
+/**
+ *
+ * @param {props} param0
+ * @returns
+ */
 export default function MyCycle({ props }) {
   // states
   const [conferenceId, setconferenceId] = useState('C');

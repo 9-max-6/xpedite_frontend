@@ -1,5 +1,5 @@
 'use client';
-import { format, parse } from 'date-fns';
+import { format } from 'date-fns';
 import {
   Card,
   CardContent,
@@ -9,9 +9,14 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
+/**
+ *
+ * @param {current supercycle} param0
+ * @returns
+ */
+
 export default function SuperCycleMap({ currSuper }) {
-  // have to change and use environment variables for this.
-  const dashboardURL = 'http://localhost:3000/dashboard/';
+  const dashboardURL = 'https://xpedite-frontend.vercel.app/';
   const currCycleCreatedAt = new Date(currSuper.curr.created_at);
   const formattedDate = format(currCycleCreatedAt, "do MMMM, yyyy 'at' h a");
   const isMatch = currSuper.curr.id === currSuper.supercycle.id;

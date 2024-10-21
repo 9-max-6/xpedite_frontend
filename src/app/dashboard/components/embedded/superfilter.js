@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { Button } from '@/components/ui/button';
+import { Loader2 } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import {
   Sheet,
@@ -8,8 +10,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { Button } from '@/components/ui/button';
-import { Loader2 } from 'lucide-react';
 import MakeSuperCycle from './MakeSuperCycle';
 import SuperCycleMap from './superCycle';
 
@@ -19,8 +19,6 @@ import SuperCycleMap from './superCycle';
  * @returns
  */
 export default function SuperCycle({ clever }) {
-  // get a list of all the current supercycles
-
   const {
     data: supercycles = [],
     isLoading,
@@ -35,7 +33,6 @@ export default function SuperCycle({ clever }) {
     cacheTime: 10 * 60 * 1000,
   });
 
-  // props
   const isFin = clever.user.designation === 'FIN';
   const millisecondsElapsedSinceCreation =
     new Date() - new Date(clever.supercycle?.created_at || 0);
@@ -43,7 +40,6 @@ export default function SuperCycle({ clever }) {
   const canMakeNew =
     fourteenDaysInMilliseconds <= millisecondsElapsedSinceCreation;
 
-  // Error state
   if (error) {
     console.error('Error fetching supercycles:', error);
     return <div>Error fetching supercycles. Please try again later.</div>;

@@ -26,6 +26,11 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 
+/**
+ *
+ * @param {props} param0
+ * @returns
+ */
 export default function MakeRequest({
   type,
   setdetailedId,

@@ -1,17 +1,6 @@
 'use client';
-import { QueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { File, ListFilter } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
 import MyCycle from './MyCycle';
 import AllCycles from './AllCycles';
 import AllSups from './AllSups';
@@ -20,11 +9,10 @@ import Comms from './Comms';
 import Filters from './Filter';
 /**
  *
- * @param {*} param
+ * @param {props} param
  * @returns
  */
 export default function Cycles({ props }) {
-  // props
   const user_designation = props.clever.user.designation;
   const hasMe = user_designation !== 'FIN';
   const hasJETs = user_designation === 'RC' || user_designation === 'DRC';
@@ -32,6 +20,7 @@ export default function Cycles({ props }) {
   const isFinance = user_designation === 'FIN';
   const isJET = user_designation === 'JET';
 
+  // state
   const [showfilters, setshowfilters] = useState(false);
 
   return (
@@ -44,8 +33,6 @@ export default function Cycles({ props }) {
           {hasSup && <TabsTrigger value="sup">RCs & DRCs</TabsTrigger>}
           {isFinance && <TabsTrigger value="all">All requests</TabsTrigger>}
         </TabsList>
-        {/* This div should be a component of it's own carryi9nhg the filters that
-        can be used to rerender any of the components in this section */}
         {!isJET && showfilters && <Filters props={props} />}
       </div>
       <TabsContent value="me">

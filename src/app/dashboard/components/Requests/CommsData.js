@@ -2,15 +2,15 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-{
-  /* Radial gradient for the container to give a faded look */
-}
+
+/**
+ *
+ * @returns CommsData
+ */
 export default function CommsData() {
   return (
     <Card className="relative" x-chunk="dashboard-05-chunk-4">
