@@ -71,9 +71,9 @@ export default async function Dashboard({ searchParams }) {
   };
 
   return (
-    <div className="flex relative flex-col sm:gap-4 sm:py-4 sm:pl-14">
+    <div className="flex bg-background relative flex-col sm:gap-4 sm:py-4 sm:pl-14">
       <div className="z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-        <Breadcrumb className="hidden md:flex">
+        <Breadcrumb className="hidden ml-2 md:flex">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
@@ -81,9 +81,6 @@ export default async function Dashboard({ searchParams }) {
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Recent requests</BreadcrumbPage>
-            </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </div>

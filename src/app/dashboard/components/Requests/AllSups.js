@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Badge } from '@/components/ui/badge';
+import { Skeleton } from '@/components/ui/skeleton';
+import TableData from './TableData';
+import { useQuery } from '@tanstack/react-query';
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -15,143 +20,100 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import NothingHere from '../NothingHere';
 
-export default function AllSups() {
-  return (
-    <Card x-chunk="dashboard-05-chunk-3">
-      <CardHeader className="px-7">
-        <CardTitle>Orders</CardTitle>
-        <CardDescription>Recent orders from your store.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Customer</TableHead>
-              <TableHead className="hidden sm:table-cell">Type</TableHead>
-              <TableHead className="hidden sm:table-cell">Status</TableHead>
-              <TableHead className="hidden md:table-cell">Date</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Olivia Smith</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  olivia@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Refund</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="outline">
-                  Declined
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
-              <TableCell className="text-right">$150.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Noah Williams</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  noah@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">
-                Subscription
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-25</TableCell>
-              <TableCell className="text-right">$350.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Emma Brown</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  emma@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Sale</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-26</TableCell>
-              <TableCell className="text-right">$450.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Liam Johnson</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  liam@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Sale</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
-              <TableCell className="text-right">$250.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Liam Johnson</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  liam@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Sale</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
-              <TableCell className="text-right">$250.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Olivia Smith</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  olivia@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Refund</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="outline">
-                  Declined
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
-              <TableCell className="text-right">$150.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Emma Brown</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  emma@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Sale</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-26</TableCell>
-              <TableCell className="text-right">$450.00</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
-  );
+export default function AllSups({ props, setshowfilters }) {
+  const [resData, setresData] = useState([]);
+  const [loading, setloading] = useState(false);
+  const [errorData, seterror] = useState(null);
+
+  function filterData() {
+    const filters = props.filters;
+    if (filters === 'all') {
+      return resData;
+    }
+    const filteredData = resData.filter((value) => {
+      return value.status === filters;
+    });
+
+    console.log(filteredData);
+
+    return filteredData;
+  }
+
+  useEffect(() => {
+    setloading(true);
+    setshowfilters(true);
+    axios
+      .get(`/api/requests/sup/?supercycle=${props.clever.supercycle.id}`)
+      .then((res) => {
+        setresData(res.data.nesteddata);
+      })
+      .catch((e) => {
+        console.log(e.toString());
+        seterror(e.toString());
+      })
+      .finally(() => {
+        setloading(false);
+      });
+  }, [props.submitted]);
+
+  if (loading || resData.length === 0) {
+    return (
+      <Card className="shadow-none border-0">
+        <div className="flex flex-col space-y-3">
+          <Skeleton className="h-[100px] w-[full] rounded-xl" />
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[full]" />
+            <Skeleton className="h-4 w-[full]" />
+          </div>
+          <Skeleton className="h-[100px] w-[full] rounded-xl" />
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[full]" />
+            <Skeleton className="h-4 w-[full]" />
+          </div>
+          <Skeleton className="h-[100px] w-[full] rounded-xl" />
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[full]" />
+            <Skeleton className="h-4 w-[full]" />
+          </div>
+        </div>
+      </Card>
+    );
+  }
+  if (errorData) {
+    return <div>Error</div>;
+  }
+
+  if (!loading && !errorData) {
+    const filteredData = filterData(resData);
+    if (filteredData.length === 0) {
+      return <NothingHere />;
+    } else {
+      return (
+        <Card className="w-full h-auto max-w-4xl mx-auto">
+          <CardHeader className="px-7">
+            <CardTitle>Orders</CardTitle>
+            <CardDescription>Recent orders from your store.</CardDescription>
+          </CardHeader>
+          <CardContent className="p-6 text-sm overflow-y-auto max-h-[420px]">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Name</TableHead>
+                  <TableHead className="hidden sm:table-cell">Type</TableHead>
+                  <TableHead className="hidden sm:table-cell">Status</TableHead>
+                  <TableHead className="hidden md:table-cell">Date</TableHead>
+                  <TableHead className="text-right">Amount</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableData props={props} filteredData={filteredData} />
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      );
+    }
+  }
 }

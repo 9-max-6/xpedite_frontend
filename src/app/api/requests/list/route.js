@@ -17,7 +17,6 @@ export async function GET(req) {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data);
     return new NextResponse(
       JSON.stringify({
         nesteddata: response.data,

@@ -44,6 +44,10 @@ export default function LoginForm() {
           title: 'Success!',
           description: 'You have successfuly logged in.',
           variant: 'success',
+          position: 'bottom-left', // Set the position
+          style: {
+            backgroundColor: 'green', //
+          },
         });
       })
       .catch((error) => {

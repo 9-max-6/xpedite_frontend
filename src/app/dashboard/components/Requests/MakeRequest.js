@@ -1,22 +1,16 @@
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
-import { Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-} from '@/components/ui/pagination';
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { FileUpload } from '@/components/ui/file-upload';
@@ -37,6 +31,8 @@ export default function MakeRequest({
   setdetailedId,
   checkid,
   supercycle,
+  submitted,
+  setsubmitted,
 }) {
   const [files, setFiles] = useState([]);
   const [total, setTotal] = useState('');
@@ -74,10 +70,15 @@ export default function MakeRequest({
           },
         }
       );
+      setsubmitted(!submitted);
       toast({
         title: 'Success!',
-        description: 'You have successfuly logged in.',
+        description: 'Successfully posted request',
         variant: 'success',
+        position: 'bottom-left', // Set the position
+        style: {
+          backgroundColor: 'green', //
+        },
       });
       console.log(response.data.nesteddata);
       setdetailedId(response.data.nesteddata.id);
@@ -150,8 +151,8 @@ export default function MakeRequest({
               </div>
               <form
                 onSubmit={(e) => {
-                  e.preventDefault(); // Prevent default form submission behavior (e.g., page reload)
-                  handleSubmit(); // Call your custom handleSubmit function
+                  e.preventDefault();
+                  handleSubmit();
                 }}
                 className="w-full"
               >

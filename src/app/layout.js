@@ -23,11 +23,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}
       >
-        <div className="h-screen relative overflow-auto w-full dark:bg-black bg-white  dark:bg-grid-white/[0.05] bg-grid-black/[0.05] relative flex items-center justify-center">
+        <div className="h-full relative overflow-auto w-full relative flex items-center justify-center">
           {/* Radial gradient for the container to give a faded look */}
-          <div className=" h-full absolute overflow-auto pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_10%,black)]"></div>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <QueryClientProvider client={queryclient}>
               {children}

@@ -32,6 +32,8 @@ export default function Cycles({ props }) {
   const isFinance = user_designation === 'FIN';
   const isJET = user_designation === 'JET';
 
+  const [showfilters, setshowfilters] = useState(false);
+
   return (
     <Tabs defaultValue="comms">
       <div className="flex items-center">
@@ -44,22 +46,26 @@ export default function Cycles({ props }) {
         </TabsList>
         {/* This div should be a component of it's own carryi9nhg the filters that
         can be used to rerender any of the components in this section */}
-        {!isJET && <Filters props={props} />}
+        {!isJET && showfilters && <Filters props={props} />}
       </div>
       <TabsContent value="me">
         <MyCycle props={props} />
       </TabsContent>
       <TabsContent value="comms">
-        <Comms />
+        <Comms
+          props={props}
+          showfilters={showfilters}
+          setshowfilters={setshowfilters}
+        />
       </TabsContent>
       <TabsContent value="all">
-        <AllCycles props={props} />
+        <AllCycles props={props} setshowfilters={setshowfilters} />
       </TabsContent>
       <TabsContent value="jets">
-        <AllJets />
+        <AllJets props={props} setshowfilters={setshowfilters} />
       </TabsContent>
       <TabsContent value="sup">
-        <AllSups />
+        <AllSups props={props} setshowfilters={setshowfilters} />
       </TabsContent>
     </Tabs>
   );

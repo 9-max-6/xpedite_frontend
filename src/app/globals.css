@@ -42,9 +42,9 @@ body {
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 0 0% 0%; /* Set this to pure black */
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card:0 0% 0%%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
@@ -69,15 +69,21 @@ body {
   }
 }
 
-
 @layer base {
+  /* Apply the border style to all elements */
   * {
     @apply border-border;
   }
+  
+  /* Set body background and text color using Tailwind's utility classes */
   body {
     @apply bg-background text-foreground;
+    background-color: hsl(var(--background)); /* Fallback for direct CSS */
+    color: hsl(var(--foreground)); /* Fallback for direct CSS */
   }
 }
+
+
 
 /* Autofill for light theme */
 .light input:-webkit-autofill {
