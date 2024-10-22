@@ -27,7 +27,7 @@ export async function GET(req) {
         nesteddata: response.data,
       }),
       {
-        status: 201,
+        status: 200,
       }
     );
   } catch (error) {
