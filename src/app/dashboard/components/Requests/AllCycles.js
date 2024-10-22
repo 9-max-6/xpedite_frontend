@@ -38,7 +38,7 @@ export default function AllCycles({ props, setshowfilters }) {
     setloading(true);
     setshowfilters(true);
     axios
-      .get(`/api/requests/list?supercycle=${props.clever.supercycle.id}`)
+      .get(`/api/requests/list/?supercycle=${props.clever.supercycle.id}`)
       .then((res) => {
         setresData(res.data.nesteddata);
       })
