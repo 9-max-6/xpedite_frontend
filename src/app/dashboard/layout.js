@@ -23,7 +23,7 @@ export default function DashboardLayout({ children }) {
     <ThemeProvider>
       <div className="flex bg-background h-full w-full flex-col">
         <div className="z-50 bg-background space-between sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-          <Button variant="link">Xpedite</Button>
+          <Link href="/">Xpedite</Link>
           <div className="flex bg-background items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
             <ModeToggle />
             <DropdownMenu>

@@ -17,7 +17,7 @@ export default function Logout() {
       .post('/api/logout')
       .then(() => {
         setTimeout(() => {
-          router.push('/');
+          router.push('/auth/login');
         }, 1000);
       })
       .catch((e) => {});

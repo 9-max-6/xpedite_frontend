@@ -19,19 +19,25 @@ import SuperCycleMap from './superCycle';
  * @returns
  */
 export default function SuperCycle({ clever }) {
-  const {
-    data: supercycles = [],
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['superCycles'],
-    queryFn: async () => {
-      const response = await axios.get('/api/cycles/super-cycles/');
-      return response.data.nesteddata;
-    },
-    staleTime: 5 * 60 * 1000,
-    cacheTime: 10 * 60 * 1000,
-  });
+  const [supercycles, setSupercycles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchSupercycles = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get('/api/cycles/super-cycles/');
+        setSupercycles(response.data.nesteddata);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSupercycles();
+  }, []);
 
   const isFin = clever.user.designation === 'FIN';
   const millisecondsElapsedSinceCreation =
