@@ -1,36 +1,35 @@
-'use client';
+import axios from 'axios';
 import {
   Card,
   CardContent,
-  CardFooter,
+  CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { BookX } from 'lucide-react';
 
 /**
  *
- * @returns CommsData
+ * @returns NothingHere
  */
 export default function CommsData() {
   return (
-    <Card className="relative" x-chunk="dashboard-05-chunk-4">
-      <CardHeader className="flex flex-row items-start bg-muted/50">
-        <CardTitle className="w-full text-center capitalize">
-          Jiinue Growth Program
-        </CardTitle>
+    <Card className="h-[750px]">
+      <CardHeader className="px-7">
+        <CardTitle>Orders</CardTitle>
+        <CardDescription>Recent requests within the project.</CardDescription>
       </CardHeader>
-      <CardHeader></CardHeader>
-      <CardContent className="p-6 h-96 text-sm">
-        <div className="relative h-full w-full dark:bg-black bg-white  dark:bg-grid-white/[0.05] bg-grid-black/[0.05] relative flex items-center justify-center">
-          <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_2%,black)]"></div>
+      <CardContent className="m-7">
+        <div className="flex  justify-center items-center w-full h-[600px] max-w-4xl mx-auto min-h-96 border border-dashed bg-transparent border-neutral-200 dark:border-neutral-800 rounded-lg">
+          <div className="flex flex-col justify-center gap-2">
+            <BookX className="h-[1] w-auto text-gray-500" />
+            <CardDescription>
+              Nothing here, navigate to one of the tabs on the left to see
+              content
+            </CardDescription>
+          </div>
         </div>
       </CardContent>
-
-      <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
-        <div className="text-xs text-muted-foreground">
-          Updated <time dateTime="2023-11-23">October 19, 2024</time>
-        </div>
-      </CardFooter>
     </Card>
   );
 }
