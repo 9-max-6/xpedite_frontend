@@ -56,10 +56,10 @@ export default function SuperCycle({ clever }) {
         <SheetHeader>
           {canMakeNew && isFin && (
             <>
-              <SheetTitle>Choose a Supercycle</SheetTitle>
+              <SheetTitle>Create a Supercycle</SheetTitle>
               <SheetDescription>
-                View all the bi-weekly supercycles here and apply a super filter
-                to your dashboard to view requests by supercycle.
+                To start a new cycle for the supervisors and trainers, click the
+                button below.
               </SheetDescription>
               <MakeSuperCycle token={clever.token} />
             </>
