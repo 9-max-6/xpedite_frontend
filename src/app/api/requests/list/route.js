@@ -11,7 +11,7 @@ export async function GET(req) {
   const apiUrl = process.env.API_URL;
   const { searchParams } = new URL(req.url);
   const supercycle = searchParams.get('supercycle');
-  const mycycleEndpoint = `${apiUrl}api/requests/?supercyle=${supercycle}`;
+  const mycycleEndpoint = `${apiUrl}api/requests/?supercycle=${supercycle}`;
 
   const cookieStore = cookies();
   const token = cookieStore.get('accessToken')?.value;
