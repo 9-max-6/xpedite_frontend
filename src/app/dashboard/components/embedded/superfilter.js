@@ -36,7 +36,7 @@ export default function SuperCycle({ clever }) {
   const isFin = clever.user.designation === 'FIN';
   const millisecondsElapsedSinceCreation =
     new Date() - new Date(clever.supercycle?.created_at || 0);
-  const fourteenDaysInMilliseconds = 14 * 24 * 60 * 60 * 1000;
+  const fourteenDaysInMilliseconds = 60 * 1000;
   const canMakeNew =
     fourteenDaysInMilliseconds <= millisecondsElapsedSinceCreation;
 
